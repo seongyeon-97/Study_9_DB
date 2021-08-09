@@ -18,10 +18,6 @@ public class LocationDAO {
 	
 	public void getOne(int location_id) {
 		
-		String user = "user02";
-		String password = "user02";
-		String url = "jdbc:oracle:thin:@127.0.0.1:1521:xe";
-		String driver = "oracle.jdbc.driver.OracleDriver";
 		
 		Connection con = null;
 		PreparedStatement st = null;
