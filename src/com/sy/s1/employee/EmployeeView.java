@@ -6,6 +6,10 @@ import com.sy.s1.loaction.LocationDTO;
 
 public class EmployeeView {
 
+	public void view(int avg) {
+		System.out.println("급여 평균 : " + avg);
+	}
+	
 	
 	public void view(ArrayList<EmployeeDTO> ar) {
 		for(int i=0; i<ar.size(); i++) {
@@ -14,19 +18,19 @@ public class EmployeeView {
 		}
 	}
 		
-	public void view(EmployeeDTO employeeDTO) {
+	public void view(EmployeeDTO dto) {
 			
-		System.out.println(employeeDTO.getEmployee_id());
-		System.out.println(employeeDTO.getFirst_name());
-		System.out.println(employeeDTO.getLast_name());
-		System.out.println(employeeDTO.getEmail());
-		System.out.println(employeeDTO.getPhone_number());
-		System.out.println(employeeDTO.getHire_date());
-		System.out.println(employeeDTO.getJob_id());
-		System.out.println(employeeDTO.getSalary());
-		System.out.println(employeeDTO.getCommission_pct());
-		System.out.println(employeeDTO.getManager_id());
-		System.out.println(employeeDTO.getDepartment_id());
+		System.out.println(dto.getEmployee_id());
+		System.out.println(dto.getFirst_name());
+		System.out.println(dto.getLast_name());
+		System.out.println(dto.getEmail());
+		System.out.println(dto.getPhone_number());
+		System.out.println(dto.getHire_date());
+		System.out.println(dto.getJob_id());
+		System.out.println(dto.getSalary());
+		System.out.println(dto.getCommission_pct());
+		System.out.println(dto.getManager_id());
+		System.out.println(dto.getDepartment_id());
 		System.out.println("---------------------------------");
 		
 		

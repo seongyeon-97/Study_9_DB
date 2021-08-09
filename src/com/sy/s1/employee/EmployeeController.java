@@ -12,8 +12,26 @@ public class EmployeeController {
 	}
 	
 	public void start() {
-		ArrayList<EmployeeDTO> ar = employeeDAO.getList();
-		employeeView.view(ar);
+		//전체 사원 출력
+//		ArrayList<EmployeeDTO> ar = employeeDAO.getList();
+//		employeeView.view(ar);
+		
+		//사원번호 입력받아 출력
+//		EmployeeDTO dto = employeeDAO.getId(200);
+//		employeeView.view(dto);
+		
+		//last_name 입력받아 출력
+//		EmployeeDTO dto = employeeDAO.getSearchLast_name();
+//		employeeView.view(dto);
+		
+		//FIRST_NAME 입력받아 출력
+//		EmployeeDTO dto = employeeDAO.getSearchFirst_name();
+//		employeeView.view(dto);
+		
+		int avg = employeeDAO.getSalaryAvg();
+		employeeView.view(avg);
+		
+		
 	}
 	
 }
