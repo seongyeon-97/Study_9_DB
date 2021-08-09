@@ -18,6 +18,7 @@ public class LocationDAO {
 	
 	public void getOne(int location_id) {
 		
+		//ADD-DTO Branch
 		
 		Connection con = null;
 		PreparedStatement st = null;
