@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.sql.Date;
 
+import com.sy.s1.departments.DepartmentsDTO;
 import com.sy.s1.loaction.LocationDTO;
 import com.sy.s1.util.DBConnect;
 
@@ -18,6 +19,46 @@ public class EmployeeDAO {
 	public EmployeeDAO() {
 		dbConnect = new DBConnect();
 	}
+	
+	public Emp_DepartDTO getJoin() {
+		Connection con =null;
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		Emp_DepartDTO emp_DepartDTO = null;
+		DepartmentsDTO departmentsDTO = null;
+		try {
+			con = dbConnect.getConnect();
+			String sql = "SELECT E.LAST_NAME, E.SALARY, E.HIRE_DATE, D.DEPARTMENT_NAME FROM EMPLOYEES E INNER JOIN DEPARTMENTS D ON E.DEPARTMENT_ID = D.DEPARTMENT_ID WHERE E.EMPLOYEE_ID = 101";
+
+			st = con.prepareStatement(sql);
+			
+			rs = st.executeQuery();
+			
+			while(rs.next()) {
+				emp_DepartDTO = new Emp_DepartDTO();
+				departmentsDTO = new DepartmentsDTO(); 
+				emp_DepartDTO.setLast_name(rs.getString("last_name"));
+				emp_DepartDTO.setSalary(rs.getInt("salary"));
+				emp_DepartDTO.setHire_date(rs.getDate("hire_date"));
+				departmentsDTO.setDepartment_name(rs.getString("department_name"));
+				emp_DepartDTO.setDepartmentsDTO(departmentsDTO);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				rs.close();
+				st.close();
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return emp_DepartDTO;
+	}
+	
 	
 	public ArrayList<EmployeeDTO> getList() {
 		Connection con =null;
@@ -45,7 +86,7 @@ public class EmployeeDAO {
 				dto.setHire_date(rs.getDate("hire_date"));
 				dto.setJob_id(rs.getString("job_id"));
 				dto.setSalary(rs.getInt("salary"));
-				dto.setCommission_pct(rs.getInt("commission_pct"));
+				dto.setCommission_pct(rs.getDouble("commission_pct"));
 				dto.setManager_id(rs.getInt("manager_id"));
 				dto.setDepartment_id(rs.getInt("department_id"));				
 				ar.add(dto);
@@ -94,7 +135,7 @@ public class EmployeeDAO {
 				dto.setHire_date(rs.getDate("hire_date"));
 				dto.setJob_id(rs.getString("job_id"));
 				dto.setSalary(rs.getInt("salary"));
-				dto.setCommission_pct(rs.getInt("commission_pct"));
+				dto.setCommission_pct(rs.getDouble("commission_pct"));
 				dto.setManager_id(rs.getInt("manager_id"));
 				dto.setDepartment_id(rs.getInt("department_id"));
 			}
@@ -140,7 +181,7 @@ public class EmployeeDAO {
 				dto.setHire_date(rs.getDate("hire_date"));
 				dto.setJob_id(rs.getString("job_id"));
 				dto.setSalary(rs.getInt("salary"));
-				dto.setCommission_pct(rs.getInt("commission_pct"));
+				dto.setCommission_pct(rs.getDouble("commission_pct"));
 				dto.setManager_id(rs.getInt("manager_id"));
 				dto.setDepartment_id(rs.getInt("department_id"));
 				
@@ -191,7 +232,7 @@ public EmployeeDTO getSearchFirst_name() {
 				dto.setHire_date(rs.getDate("hire_date"));
 				dto.setJob_id(rs.getString("job_id"));
 				dto.setSalary(rs.getInt("salary"));
-				dto.setCommission_pct(rs.getInt("commission_pct"));
+				dto.setCommission_pct(rs.getDouble("commission_pct"));
 				dto.setManager_id(rs.getInt("manager_id"));
 				dto.setDepartment_id(rs.getInt("department_id"));
 				
@@ -243,5 +284,38 @@ public EmployeeDTO getSearchFirst_name() {
 			}
 		}
 		return avg;
+	}
+	
+	public ArrayList<EmployeeDTO> getSalaryAvgGroupby() {
+		Connection con = null;
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		ArrayList<EmployeeDTO> ar = new ArrayList<>();
+		int avg = 0;
+		try {
+			con = dbConnect.getConnect();
+			String sql = "SELECT DEPARTMENT_ID, AVG(SALARY) FROM EMPLOYEES GROUP BY DEPARTMENT_ID";
+			st = con.prepareStatement(sql);
+			rs = st.executeQuery();
+			rs.next();
+			avg = rs.getInt(1);
+			while(rs.next()) {
+				EmployeeDTO dto = new EmployeeDTO();				
+				ar.add(dto);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				rs.close();
+				st.close();
+				con.close();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return ar;
 	}
 }

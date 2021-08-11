@@ -11,7 +11,7 @@ public class EmployeeDTO {
 	private Date hire_date;
 	private String job_id;
 	private int salary;
-	private int commission_pct;
+	private double commission_pct;
 	private int manager_id;
 	private int department_id;
 	public int getEmployee_id() {
@@ -47,8 +47,8 @@ public class EmployeeDTO {
 	public Date getHire_date() {
 		return hire_date;
 	}
-	public void setHire_date(Date date) {
-		this.hire_date = date;
+	public void setHire_date(Date hire_date) {
+		this.hire_date = hire_date;
 	}
 	public String getJob_id() {
 		return job_id;
@@ -62,10 +62,10 @@ public class EmployeeDTO {
 	public void setSalary(int salary) {
 		this.salary = salary;
 	}
-	public int getCommission_pct() {
+	public double getCommission_pct() {
 		return commission_pct;
 	}
-	public void setCommission_pct(int commission_pct) {
+	public void setCommission_pct(double commission_pct) {
 		this.commission_pct = commission_pct;
 	}
 	public int getManager_id() {
@@ -80,6 +80,7 @@ public class EmployeeDTO {
 	public void setDepartment_id(int department_id) {
 		this.department_id = department_id;
 	}
+	
 	
 	
 }

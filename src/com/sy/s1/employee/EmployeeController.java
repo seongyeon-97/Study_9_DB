@@ -28,9 +28,16 @@ public class EmployeeController {
 //		EmployeeDTO dto = employeeDAO.getSearchFirst_name();
 //		employeeView.view(dto);
 		
-		int avg = employeeDAO.getSalaryAvg();
-		employeeView.view(avg);
+		//전체평균급여정보
+//		int avg = employeeDAO.getSalaryAvg();
+//		employeeView.view(avg);
 		
+		//부서별평균급여정보
+//		ArrayList<EmployeeDTO> ar= employeeDAO.getSalaryAvgGroupby();
+//		employeeView.groupView(ar);
+		
+		Emp_DepartDTO emp_DepartDTO = employeeDAO.getJoin();
+		employeeView.view(emp_DepartDTO);
 		
 	}
 	

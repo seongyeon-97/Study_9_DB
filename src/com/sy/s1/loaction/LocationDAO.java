@@ -18,6 +18,48 @@ public class LocationDAO {
 		dbConnect = new DBConnect();
 	}
 	
+	public LocationDTO getLocation(int employee_id) {
+		Connection con =null;
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		LocationDTO locationDTO = null;
+		try {
+			con = dbConnect.getConnect();
+			String sql = "SELECT * \r\n"
+					+ "FROM LOCATIONS \r\n"
+					+ "WHERE LOCATION_ID = (SELECT LOCATION_ID \r\n"
+					+ "FROM  DEPARTMENTS \r\n"
+					+ "WHERE DEPARTMENT_ID = (SELECT DEPARTMENT_ID \r\n"
+					+ "FROM EMPLOYEES \r\n"
+					+ "WHERE EMPLOYEE_ID = ?))";
+			st = con.prepareStatement(sql);
+			st.setInt(1, employee_id);
+			rs = st.executeQuery();
+			if(rs.next()) {
+				locationDTO = new LocationDTO();
+				locationDTO.setLocation_id(rs.getInt("location_id"));
+	            locationDTO.setStreet_address(rs.getString("street_address"));
+	            locationDTO.setPostal_code(rs.getString("postal_code"));
+	            locationDTO.setCity(rs.getString("city"));
+	            locationDTO.setState_province(rs.getString("state_province"));
+	            locationDTO.setCountry_id(rs.getString("country_id"));
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				rs.close();
+				st.close();
+				con.close();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return locationDTO;
+	}
+	
 	public int getCount() {
 		Connection con =null;
 		PreparedStatement st = null;
