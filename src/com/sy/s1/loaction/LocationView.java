@@ -4,6 +4,10 @@ import java.util.ArrayList;
 
 public class LocationView {
 	
+	public void view(String msg) {
+		System.out.println(msg);
+	}
+	
 	public void view(int count) {
 		System.out.println("COUNT :" + count);
 	}

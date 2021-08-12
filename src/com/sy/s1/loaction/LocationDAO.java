@@ -148,14 +148,14 @@ public class LocationDAO {
 	   }
 	
 	
-	public LocationDTO getOne(int location_id) {
+	public LocationDTO getOne(LocationDTO locationDTO) {
 		
 		
 		
 		Connection con = null;
 		PreparedStatement st = null;
 		ResultSet rs = null;
-		LocationDTO locationDTO = null;
+		LocationDTO dto = null;
 		
 		try {
 			con = dbConnect.getConnect();
@@ -164,18 +164,18 @@ public class LocationDAO {
 			
 			st = con.prepareStatement(sql);
 			
-			st.setInt(1, location_id);
+			st.setInt(1, locationDTO.getLocation_id());
 			
 			rs = st.executeQuery();					
 			
 			if(rs.next()) {
-				locationDTO = new LocationDTO();
-				locationDTO.setLocation_id(rs.getInt("location_id"));
-				locationDTO.setStreet_address(rs.getString("street_address"));
-				locationDTO.setPostal_code(rs.getString("postal_code"));
-				locationDTO.setCity(rs.getString("city"));
-				locationDTO.setState_province(rs.getString("state_province"));
-				locationDTO.setCountry_id(rs.getString("country_id"));
+				dto = new LocationDTO();
+				dto.setLocation_id(rs.getInt("location_id"));
+				dto.setStreet_address(rs.getString("street_address"));
+				dto.setPostal_code(rs.getString("postal_code"));
+				dto.setCity(rs.getString("city"));
+				dto.setState_province(rs.getString("state_province"));
+				dto.setCountry_id(rs.getString("country_id"));
 			}
 			
 		} catch (Exception e) {
@@ -183,7 +183,7 @@ public class LocationDAO {
 			e.printStackTrace();
 		}
 		
-		return locationDTO;
+		return dto;
 		
 	}
 	
