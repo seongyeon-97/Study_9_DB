@@ -17,7 +17,44 @@ public class DepartmentsDAO {
 		dbConnect = new DBConnect();
 	}
 	
-public Depart_EmpDTO getJoin(DepartmentsDTO departmentsDTO) {
+	public int setInsert(DepartmentsDTO departmentsDTO) {
+		
+		Connection con = null;
+		PreparedStatement st = null;
+		int result = 0;
+		
+		try {
+			con = dbConnect.getConnect();
+			String sql = "INSERT INTO DEPARTMENTS VALUES(?, ?, ?, ?)";
+			st = con.prepareStatement(sql);
+			st.setInt(1, departmentsDTO.getDepartment_id());
+			st.setString(2, departmentsDTO.getDepartment_name());
+			st.setInt(3, departmentsDTO.getManager_id());
+			st.setInt(4, departmentsDTO.getLocation_id());
+			
+			result = st.executeUpdate(); //insert, update, delete
+			
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				st.close();
+				con.close();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+				
+		return result;
+		
+	}
+	
+	
+	public Depart_EmpDTO getJoin(DepartmentsDTO departmentsDTO) {
 		
 		Connection con = null;
 		PreparedStatement st = null;
