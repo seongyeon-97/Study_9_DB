@@ -28,8 +28,8 @@ public class LocationController {
 		//LocationDTO locationDTO = locationDAO.getOne(1000);
 		//locationView.view(locationDTO);
 		
-		LocationDTO locationDTO = locationDAO.getLocation(100);
-		locationView.view(locationDTO);
+//		LocationDTO locationDTO = locationDAO.getLocation(100);
+//		locationView.view(locationDTO);
 		
 	}
 	
