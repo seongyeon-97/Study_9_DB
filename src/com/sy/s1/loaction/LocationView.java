@@ -1,8 +1,11 @@
 package com.sy.s1.loaction;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class LocationView {
+	
+	
 	
 	public void view(String msg) {
 		System.out.println(msg);
