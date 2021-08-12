@@ -36,7 +36,7 @@ public class EmployeeController {
 //		ArrayList<EmployeeDTO> ar= employeeDAO.getSalaryAvgGroupby();
 //		employeeView.groupView(ar);
 		
-		Emp_DepartDTO emp_DepartDTO = employeeDAO.getJoin();
+		Emp_DepartDTO emp_DepartDTO = employeeDAO.getJoin(102);
 		employeeView.view(emp_DepartDTO);
 		
 	}

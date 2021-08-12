@@ -20,21 +20,27 @@ public class EmployeeDAO {
 		dbConnect = new DBConnect();
 	}
 	
-	public Emp_DepartDTO getJoin() {
+	
+	
+	public Emp_DepartDTO getJoin(int employee_id) {
 		Connection con =null;
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		Emp_DepartDTO emp_DepartDTO = null;
 		DepartmentsDTO departmentsDTO = null;
+		
 		try {
 			con = dbConnect.getConnect();
-			String sql = "SELECT E.LAST_NAME, E.SALARY, E.HIRE_DATE, D.DEPARTMENT_NAME FROM EMPLOYEES E INNER JOIN DEPARTMENTS D ON E.DEPARTMENT_ID = D.DEPARTMENT_ID WHERE E.EMPLOYEE_ID = 101";
+			String sql = "SELECT E.LAST_NAME, E.SALARY, E.HIRE_DATE, D.DEPARTMENT_NAME "
+					+ "FROM EMPLOYEES E INNER JOIN DEPARTMENTS D "
+					+ "ON E.DEPARTMENT_ID = D.DEPARTMENT_ID "
+					+ "WHERE E.EMPLOYEE_ID = ?";
 
 			st = con.prepareStatement(sql);
-			
+			st.setInt(1, employee_id);//employeeDTO.getEmployee_id()
 			rs = st.executeQuery();
 			
-			while(rs.next()) {
+			if(rs.next()) {
 				emp_DepartDTO = new Emp_DepartDTO();
 				departmentsDTO = new DepartmentsDTO(); 
 				emp_DepartDTO.setLast_name(rs.getString("last_name"));
